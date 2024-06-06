@@ -1,0 +1,89 @@
+<!-- event_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Eventos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Eventos</h1>
+        <ul>
+            {% for event in events %}
+                <li>{{ event.title }} - {{ event.start_datetime|date:"d/m/Y H:i" }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Criar Novo Evento</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="id_title">Título:</label>
+            {{ form.title }}
+            <label for="id_description">Descrição:</label>
+            {{ form.description }}
+            <label for="id_start_datetime">Data e Hora de Início:</label>
+            {{ form.start_datetime }}
+            <label for="id_end_datetime">Data e Hora de Término:</label>
+            {{ form.end_datetime }}
+            <label for="id_location">Local:</label>
+            {{ form.location }}
+            <button type="submit">Criar Evento</button>
+        </form>
+    </div>
+</body>
+</html>
